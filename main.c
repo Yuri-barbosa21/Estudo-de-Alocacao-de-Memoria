@@ -1,5 +1,6 @@
 #include "stdio.h"
 #include "stdlib.h"
+#include <time.h>
 
 int main(void){
 
@@ -24,7 +25,7 @@ int main(void){
 
 
     // ----------------- ALOCAÇÃO DINAMICA DE MEMORIA COM CALLOC ------------------
-    
+    /*
     char *x;
 
     x = calloc(1, sizeof(char));
@@ -38,8 +39,48 @@ int main(void){
     else{
         printf("Erro ao alocar memoria!\n");
     }
+    */
+    //_____________________________________________________________________________
+
+
+
+    // ----------------- AUMENTAR TAMANHO DE UM VETOR COM REALLOC ------------------
+    
+    int i, tam, r, *vet;
+
+    printf("Digite o tamanho do vetor: ");
+    scanf("%d", &tam);
+    srand(time(NULL));
+     
+    vet = malloc(tam * sizeof(char));
+
+    if(vet){
+        printf("Memoria alocada com sucesso!\n");
+        for(i = 0; i < tam; i++){
+            *(vet + i) = rand() % 100 + 1;
+        }
+        for(i = 0; i < tam; i++){
+            printf("%d ", *(vet + i));
+        }
+        printf("\n");
+
+        printf("Digite o novo tamanho do vetor: ");
+        scanf("%d", &tam);
+
+        vet = realloc(vet, tam);
+
+        printf("\nVetor realocado:\n");
+        for(i = 0; i < tam; i++){
+            printf("%d ", *(vet + i));
+        }
+        printf("\n");
+    }
+    else{
+        printf("Erro ao alocar memoria!\n");
+    }
     
     //_____________________________________________________________________________
+    
     
     return 0;
 }
